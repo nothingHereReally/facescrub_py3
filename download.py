@@ -1,4 +1,3 @@
-#!/usr/bin/env python2.7
 # coding: utf-8
 import os
 from os.path import join, exists
@@ -13,7 +12,7 @@ if not exists(RESULT_ROOT):
     os.mkdir(RESULT_ROOT)
 
 
-def download((names, urls, bboxes)):
+def download(*args): #(names, urls, bboxes)
     """
         download from urls into folder names using wget
     """
@@ -27,11 +26,11 @@ def download((names, urls, bboxes)):
         directory = join(RESULT_ROOT, names[i])
         if not exists(directory):
             os.mkdir(directory)
-        fname = hashlib.sha1(urls[i]).hexdigest() + '.jpg'
+        fname = hashlib.sha1(urls[i].encode("utf-8")).hexdigest() + '.jpg'
         dst = join(directory, fname)
-        print "downloading", dst
+        print("downloading", dst)
         if exists(dst):
-            print "already downloaded, skipping..."
+            print("already downloaded, skipping...")
             continue
         else:
             res = os.system(CMD % (urls[i], dst))
@@ -91,6 +90,6 @@ if __name__ == '__main__':
 
         pool_size = multiprocessing.cpu_count()
         pool = multiprocessing.Pool(processes=pool_size, maxtasksperchild=2)
-        pool.map(download, tasks)
+        pool.map(download,tasks)
         pool.close()
         pool.join()
