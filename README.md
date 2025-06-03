@@ -7,7 +7,7 @@ To get the [FaceScrub dataset](http://vintage.winklerbros.net/facescrub.html):
 #### 1) Clone this repo
 ```bash
 git clone https://github.com/nothingHereReally/facescrub_py3.git
-facescrub_py3
+cd facescrub_py3
 ```
 #### 2) Create a python virtual envronment and activate it
 
